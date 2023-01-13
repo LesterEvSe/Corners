@@ -1,10 +1,12 @@
 #include "Field.hpp"
 
 using namespace sf;
-RenderWindow window(VideoMode(800, 800), "Corners"); // main window of the game
+RenderWindow window(VideoMode(800, 800), "Corners", Style::Close); // main window of the game
 
 int main()
 {
+    window.setFramerateLimit(10);
+    window.setPosition(Vector2i((1920-800)/2, (1080-800)/2)); // screen center
 	// start menu and victory picture 
 	Texture start_menu, white_win, black_win, tie;
 	start_menu.loadFromFile("../images/start_menu.png");

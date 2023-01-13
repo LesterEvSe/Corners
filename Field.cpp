@@ -1,12 +1,5 @@
 #include "Field.hpp"
 
-enum Checkers
-{
-	NONE = 0,
-	WHITE = 1,
-	BLACK = 2
-};
-
 using namespace sf;
 
 extern RenderWindow window;
@@ -90,7 +83,7 @@ void Field::rendering()
 int Field::get_width() { return m_width; }
 int Field::get_winner() { return m_winner; }
 
-Field::Field() : m_width(100), m_dimension(8), m_logic{ Checkers::NONE }, m_start(std::make_pair(-1, -1)),
+Field::Field() : m_width(100), m_dimension(8), m_logic{Checkers::NONE}, m_start(std::make_pair(-1, -1)),
 m_player_move(Checkers::WHITE), m_move_made(false), m_move(false), m_winner(-1)
 {
 	white.loadFromFile("../images/white.png");
