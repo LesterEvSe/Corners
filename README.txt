@@ -17,4 +17,4 @@
   Run
   ---
   
-  If project was builded successfully, you can run it, using './corners' command. To close the game, just click on the cross in the upper right corner.
+  If project was builded successfully, you can run it, using './Corners' command. To close the game, just click on the cross in the upper right corner.

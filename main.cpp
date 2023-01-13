@@ -1,4 +1,4 @@
-#include "Field.hpp"
+#include "field.hpp"
 
 using namespace sf;
 RenderWindow window(VideoMode(800, 800), "Corners", Style::Close); // main window of the game
