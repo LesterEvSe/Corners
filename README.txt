@@ -1,5 +1,5 @@
 
-					SFML Game "Corners"
+								SFML Game "Corners"
 
   What is it?
   -----------
