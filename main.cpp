@@ -3,28 +3,33 @@
 using namespace sf;
 RenderWindow window(VideoMode(800, 800), "Corners", Style::Close); // main window of the game
 
-int main()
+void preparation_phase(Texture& start_menu, Texture& white_win,
+                       Texture& black_win, Texture& tie)
 {
     window.setFramerateLimit(10);
     window.setPosition(Vector2i((1920-800)/2, (1080-800)/2)); // screen center
-	// start menu and victory picture 
-	Texture start_menu, white_win, black_win, tie;
-	start_menu.loadFromFile("../images/start_menu.png");
-	white_win.loadFromFile("../images/white_win.png");
-	black_win.loadFromFile("../images/black_win.jpg");
-	tie.loadFromFile("../images/tie.jpg");
+    // start menu and victory picture
+    start_menu.loadFromFile("../images/start_menu.png");
+    white_win.loadFromFile("../images/white_win.png");
+    black_win.loadFromFile("../images/black_win.jpg");
+    tie.loadFromFile("../images/tie.jpg");
 
-	window.draw(Sprite(start_menu));
-	window.display();
-	Event event{};
+    window.draw(Sprite(start_menu));
+    window.display();
+    Event event{};
 
-	while (true)
-	{
-		window.pollEvent(event);
-		if (event.type == Event::Closed) { window.close(); break; }
-		if (event.key.code == Keyboard::Enter)	break;
-	}
+    while (true)
+    {
+        window.pollEvent(event);
+        if (event.type == Event::Closed) { window.close(); break; }
+        if (event.key.code == Keyboard::Enter)	break;
+    }
+}
 
+int main()
+{
+    Texture start_menu, white_win, black_win, tie;
+    preparation_phase(start_menu, white_win, black_win, tie);
 	// create the chessboard
 	Field field;
 
