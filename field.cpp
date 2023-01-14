@@ -9,7 +9,7 @@ void Field::choose_cell(const Event& event, int str, int col)
 {
 	if (static_cast<int>(event.key.code) == Mouse::Left && m_logic[str][col] == m_player_move)
 	{
-		m_board[str][col].setFillColor(Color::Green);
+		m_board_fill[str][col].setFillColor(Color::Green);
 		m_start = std::make_pair(str, col);
 		m_move = true;
 	}
@@ -19,8 +19,8 @@ void Field::cancel()
 {
 	if (m_start.first != -1)
 	{
-		if ((m_start.first + m_start.second) % 2) m_board[m_start.first][m_start.second].setFillColor(Color::Black);
-		else m_board[m_start.first][m_start.second].setFillColor(Color::White);
+		if ((m_start.first + m_start.second) % 2) m_board_fill[m_start.first][m_start.second].setFillColor(Color::Black);
+		else m_board_fill[m_start.first][m_start.second].setFillColor(Color::White);
 		m_start.first = -1;
 	}
 	rendering();
@@ -63,13 +63,13 @@ void Field::draw_field()
 {
 	for (int i = 0; i < m_dimension; ++i)
 		for (int j = 0; j < m_dimension; ++j)
-			window.draw(m_board[i][j]);
+			window.draw(m_board_fill[i][j]);
 }
 void Field::draw_checkers()
 {
 	for (int i = 0; i < m_dimension; ++i)
 		for (int j = 0; j < m_dimension; ++j)
-			if (m_logic[i][j]) window.draw(m_checkers[i][j]);
+			if (m_logic[i][j]) window.draw(m_checkers_sprite[i][j]);
 }
 void Field::rendering()
 {
@@ -84,7 +84,7 @@ int Field::get_width() { return m_width; }
 int Field::get_winner() { return m_winner; }
 
 Field::Field() : m_width(100), m_dimension(8), m_logic{Checkers::NONE}, m_start(std::make_pair(-1, -1)),
-m_player_move(Checkers::WHITE), m_move_made(false), m_move(false), m_winner(-1)
+    m_player_move(Checkers::WHITE), m_move_made(false), m_move(false), m_winner(-1)
 {
 	white.loadFromFile("../images/white.png");
 	black.loadFromFile("../images/black.png");
@@ -92,29 +92,29 @@ m_player_move(Checkers::WHITE), m_move_made(false), m_move(false), m_winner(-1)
 	for (int i = 0; i < m_dimension; ++i)
 		for (int j = 0; j < m_dimension; ++j)
 		{
-			m_board[i][j] = RectangleShape(Vector2f(m_width, m_width));
-			m_board[i][j].move(j * m_width, i * m_width);
+			m_board_fill[i][j] = RectangleShape(Vector2f(m_width, m_width));
+			m_board_fill[i][j].move(j * m_width, i * m_width);
 
-			if ((i + j) % 2) m_board[i][j].setFillColor(Color::Black);
-			else m_board[i][j].setFillColor(Color::White);
+			if ((i + j) % 2) m_board_fill[i][j].setFillColor(Color::Black);
+			else m_board_fill[i][j].setFillColor(Color::White);
 
-			window.draw(m_board[i][j]);
+			window.draw(m_board_fill[i][j]);
 		}
 
 	for (int i = 0; i < 3; ++i)
 		for (int j = 0; j < 3; ++j)
 		{
-			m_checkers[i][j] = Sprite(white);
-			m_checkers[i + 5][j + 5] = Sprite(black);
+			m_checkers_sprite[i][j] = Sprite(white);
+			m_checkers_sprite[i + 5][j + 5] = Sprite(black);
 
-			m_checkers[i][j].move(j * m_width, i * m_width);
-			m_checkers[i + 5][j + 5].move((j + 5) * m_width, (i + 5) * m_width);
+            m_checkers_sprite[i][j].move(j * m_width, i * m_width);
+			m_checkers_sprite[i + 5][j + 5].move((j + 5) * m_width, (i + 5) * m_width);
 
 			m_logic[i][j] = Checkers::WHITE;
 			m_logic[i + 5][j + 5] = Checkers::BLACK;
 
-			window.draw(m_checkers[i][j]);
-			window.draw(m_checkers[i + 5][j + 5]);
+			window.draw(m_checkers_sprite[i][j]);
+			window.draw(m_checkers_sprite[i + 5][j + 5]);
 		}
 	window.display();
 }
@@ -138,8 +138,8 @@ void Field::move(const Event& event, int str, int col)
 			{
 				if (m_move_made) return;
 				std::swap(m_logic[m_start.first][m_start.second], m_logic[str][col]);
-				m_checkers[str][col] = (m_player_move == 1) ? Sprite(white) : Sprite(black);
-				m_checkers[str][col].move(col * m_width, str * m_width);
+                m_checkers_sprite[str][col] = (m_player_move == 1) ? Sprite(white) : Sprite(black);
+                m_checkers_sprite[str][col].move(col * m_width, str * m_width);
 
 				m_move_made = true;
 				next_move();
@@ -151,8 +151,8 @@ void Field::move(const Event& event, int str, int col)
 			{
 
 				std::swap(m_logic[m_start.first][m_start.second], m_logic[str][col]);
-				m_checkers[str][col] = (m_player_move == 1) ? Sprite(white) : Sprite(black);
-				m_checkers[str][col].move(col * m_width, str * m_width);
+                m_checkers_sprite[str][col] = (m_player_move == 1) ? Sprite(white) : Sprite(black);
+                m_checkers_sprite[str][col].move(col * m_width, str * m_width);
 
 				m_move_made = true;
 				cancel();

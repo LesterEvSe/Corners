@@ -8,7 +8,8 @@
   
   Build
   -----
-  
+
+  - The first thing you need is to have SFML version 2 or higher installed on your computer.
   - To build a project, you need to make a 'build' directory in the project folder with the command 'mkdir build'.
   - Then move into it with the command 'cd build'.
   - Next, you need to run 'cmake ..' command inside 'build' directory.
