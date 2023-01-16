@@ -83,8 +83,10 @@ void Field::rendering()
 int Field::get_width() { return m_width; }
 int Field::get_winner() { return m_winner; }
 
-Field::Field() : m_width(100), m_dimension(8), m_logic{Checkers::NONE}, m_start(std::make_pair(-1, -1)),
-    m_player_move(Checkers::WHITE), m_move_made(false), m_move(false), m_winner(-1)
+Field::Field() : m_width(100), m_dimension(8), m_logic(m_dimension, std::vector<Checkers>(m_dimension)),
+    m_board_fill(m_dimension, std::vector<RectangleShape>(m_dimension)),
+    m_checkers_sprite(m_dimension, std::vector<Sprite>(m_dimension)),
+    m_start(std::make_pair(-1, -1)), m_player_move(Checkers::WHITE), m_move_made(false), m_move(false), m_winner(-1)
 {
 	white.loadFromFile("../images/white.png");
 	black.loadFromFile("../images/black.png");

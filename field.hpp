@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <cstdlib> // for std::swap
-#include <array> // for constant dimensions of boards
+#include <vector> // for constant dimensions of boards
 
 using namespace sf;
 
@@ -20,10 +20,10 @@ private:
 	const int m_width;
 	const int m_dimension;
 
-	std::array<std::array<Checkers, 8>, 8> m_logic; // checkers that determine what stands in a certain cell
+	std::vector<std::vector<Checkers>> m_logic; // checkers that determine what stands in a certain cell
 
-	std::array<std::array<RectangleShape, 8>, 8> m_board_fill; // field squares
-	std::array<std::array<Sprite, 8>, 8> m_checkers_sprite; // checkers picture on the field
+	std::vector<std::vector<RectangleShape>> m_board_fill; // field squares
+	std::vector<std::vector<Sprite>> m_checkers_sprite; // checkers picture on the field
 
 	std::pair<int, int> m_start;
 	int  m_player_move;
