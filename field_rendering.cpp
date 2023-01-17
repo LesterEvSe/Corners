@@ -1,8 +1,6 @@
 #include "field_logic.hpp"
 #include "field_rendering.hpp"
 
-using namespace sf;
-
 extern RenderWindow window;
 extern Texture white, black; // Можно попробовать сделать static
 

@@ -1,11 +1,9 @@
 #ifndef FIELD_RENDERING_HPP
 #define FIELD_RENDERING_HPP
 
-#include <SFML/Graphics.hpp>
 #include <vector>
 #include "field_logic.hpp"
-
-using namespace sf;
+#include "general_set.hpp"
 
 class FieldRendering
 {

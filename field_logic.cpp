@@ -1,7 +1,5 @@
 #include "field_logic.hpp"
 
-using namespace sf;
-
 extern RenderWindow window;
 Texture white, black;
 

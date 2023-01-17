@@ -1,20 +1,10 @@
 #ifndef FIELD_LOGIC_HPP
 #define FIELD_LOGIC_HPP
 
-#include <SFML/Graphics.hpp>
 #include <cstdlib> // for std::swap
 #include <utility> // for std::make_pair
 #include <vector> // for constant dimensions of boards
-//#include "field_rendering.hpp"
-
-using namespace sf;
-
-enum Checkers
-{
-    NONE = 0,
-    WHITE = 1,
-    BLACK = 2
-};
+#include "general_set.hpp"
 
 class FieldLogic
 {

@@ -1,7 +1,6 @@
 #include "field_logic.hpp"
 #include "field_rendering.hpp"
 
-using namespace sf;
 RenderWindow window(VideoMode(800, 800), "Corners", Style::Close); // main window of the game
 
 void preparation_phase(Texture& start_menu, Texture& white_win,
