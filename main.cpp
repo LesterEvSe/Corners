@@ -1,5 +1,4 @@
 #include "field_logic.hpp"
-#include "field_rendering.hpp"
 
 RenderWindow window(VideoMode(800, 800), "Corners", Style::Close); // main window of the game
 
@@ -38,7 +37,6 @@ int main()
 
 	// create the chessboard
 	FieldLogic field_logic;
-    FieldRendering field_rendering(field_logic);
 
 	// main game cycle, is executed while the window is open
 	while (window.isOpen())
@@ -64,7 +62,7 @@ int main()
 		if      (field_logic.get_winner() == -1)  continue;
 		else if (field_logic.get_winner() == 0 )  window.draw(Sprite(tie));
 		else if (field_logic.get_winner() == 1 )  window.draw(Sprite(white_win));
-		else                                window.draw(Sprite(black_win));
+		else                                      window.draw(Sprite(black_win));
 
 		window.display();
         while (window.pollEvent(inner_event)) {
