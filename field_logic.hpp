@@ -1,9 +1,10 @@
-#ifndef FIELD_HPP
-#define FIELD_HPP
+#ifndef FIELD_LOGIC_HPP
+#define FIELD_LOGIC_HPP
 
 #include <SFML/Graphics.hpp>
 #include <cstdlib> // for std::swap
 #include <vector> // for constant dimensions of boards
+//#include "field_rendering.hpp"
 
 using namespace sf;
 
@@ -14,9 +15,10 @@ enum Checkers
     BLACK = 2
 };
 
-class Field
+class FieldLogic
 {
 private:
+    //friend class FieldRendering;
 	const int m_width;
 	const int m_dimension;
 
@@ -44,7 +46,7 @@ public:
 	int get_width();
 	int get_winner();
 
-	Field();
+	FieldLogic();
 	void move(const Event&, int str, int col);
 };
 

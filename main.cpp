@@ -1,4 +1,5 @@
-#include "field.hpp"
+#include "field_logic.hpp"
+#include "field_rendering.hpp"
 
 using namespace sf;
 RenderWindow window(VideoMode(800, 800), "Corners", Style::Close); // main window of the game
@@ -35,16 +36,18 @@ int main()
 {
     Texture start_menu, white_win, black_win, tie;
     preparation_phase(start_menu, white_win, black_win, tie);
+
 	// create the chessboard
-	Field field;
+	FieldLogic field_logic;
+    //FieldRendering field_rendering(field_logic);
 
 	// main game cycle, is executed while the window is open
 	while (window.isOpen())
 	{
 		// reads the coordinates of the pressed key on the mouse
 		Vector2i pos = Mouse::getPosition(window);
-		int col = pos.x / field.get_width();
-		int str = pos.y / field.get_width();
+		int col = pos.x / field_logic.get_width();
+		int str = pos.y / field_logic.get_width();
 
 		// the queue of events in the loop is processed
 		Event inner_event{};
@@ -56,12 +59,12 @@ int main()
 
 			// was the mouse button pressed?
 			if (inner_event.type == Event::MouseButtonPressed)
-                field.move(inner_event, str, col);
+                field_logic.move(inner_event, str, col);
 		}
 
-		if      (field.get_winner() == -1)  continue;
-		else if (field.get_winner() == 0 )  window.draw(Sprite(tie));
-		else if (field.get_winner() == 1 )  window.draw(Sprite(white_win));
+		if      (field_logic.get_winner() == -1)  continue;
+		else if (field_logic.get_winner() == 0 )  window.draw(Sprite(tie));
+		else if (field_logic.get_winner() == 1 )  window.draw(Sprite(white_win));
 		else                                window.draw(Sprite(black_win));
 
 		window.display();

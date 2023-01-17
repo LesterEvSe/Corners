@@ -1,11 +1,11 @@
-#include "field.hpp"
+#include "field_logic.hpp"
 
 using namespace sf;
 
 extern RenderWindow window;
 Texture white, black;
 
-Field::Field() :
+FieldLogic::FieldLogic() :
     m_width(100),
     m_dimension(8),
 
@@ -52,7 +52,7 @@ Field::Field() :
     window.display();
 }
 
-void Field::choose_cell(const Event& event, const int str, const int col)
+void FieldLogic::choose_cell(const Event& event, int str, int col)
 {
 	if (static_cast<int>(event.key.code) == Mouse::Left && m_logic[str][col] == m_player_move)
 	{
@@ -62,7 +62,7 @@ void Field::choose_cell(const Event& event, const int str, const int col)
 	}
 	rendering();
 }
-void Field::cancel()
+void FieldLogic::cancel()
 {
 	if (m_start.first != -1)
 	{
@@ -72,7 +72,7 @@ void Field::cancel()
 	}
 	rendering();
 }
-void Field::next_move()
+void FieldLogic::next_move()
 {
 	// You can walk only when you make a move
 	if (m_move_made)
@@ -85,7 +85,7 @@ void Field::next_move()
 	}
 	rendering();
 }
-void Field::check_winner()
+void FieldLogic::check_winner()
 {
 	// If now the move of player 1 (white) starts, then check if the game is not over
 	if (m_player_move == 1)
@@ -109,19 +109,19 @@ void Field::check_winner()
 	}
 }
 
-void Field::draw_field()
+void FieldLogic::draw_field()
 {
 	for (int i = 0; i < m_dimension; ++i)
 		for (int j = 0; j < m_dimension; ++j)
 			window.draw(m_board_fill[i][j]);
 }
-void Field::draw_checkers()
+void FieldLogic::draw_checkers()
 {
 	for (int i = 0; i < m_dimension; ++i)
 		for (int j = 0; j < m_dimension; ++j)
 			if (m_logic[i][j]) window.draw(m_checkers_sprite[i][j]);
 }
-void Field::rendering()
+void FieldLogic::rendering()
 {
 	window.clear(Color::White); // clear the window and redraws it in white
 	draw_field();
@@ -129,10 +129,10 @@ void Field::rendering()
 	window.display();
 }
 
-int Field::get_width()  { return m_width;  }
-int Field::get_winner() { return m_winner; }
+int FieldLogic::get_width()  { return m_width;  }
+int FieldLogic::get_winner() { return m_winner; }
 
-void Field::move(const Event& event, const int str, const int col)
+void FieldLogic::move(const Event& event, int str, int col)
 {
 	if (!m_move){
         choose_cell(event, str, col);
