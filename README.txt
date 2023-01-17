@@ -4,7 +4,7 @@
   What is it?
   -----------
   
-  A program for Linux that uses the SFML graphical library. This is a checker game called "Corners" designed to entertain two players on the same device. The rules of the game are shown on the main screen of the game.
+  A program for Linux that uses the SFML graphical library. This is a checker game called "Corners" designed to entertain two players on the same device. The rules of the game are shown on the main application screen.
   
   Requirements
   ------------
