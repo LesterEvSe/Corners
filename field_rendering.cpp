@@ -1,10 +1,10 @@
+#include "field_logic.hpp"
 #include "field_rendering.hpp"
 
-/*
 using namespace sf;
 
 extern RenderWindow window;
-Texture white, black; // Можно попробовать сделать static
+extern Texture white, black; // Можно попробовать сделать static
 
 FieldRendering::FieldRendering(FieldLogic& logic) :
     m_width(100),
@@ -64,4 +64,3 @@ void FieldRendering::rendering()
 }
 
 int FieldRendering::get_width()  { return m_width;  }
- */

@@ -39,7 +39,7 @@ int main()
 
 	// create the chessboard
 	FieldLogic field_logic;
-    //FieldRendering field_rendering(field_logic);
+    FieldRendering field_rendering(field_logic);
 
 	// main game cycle, is executed while the window is open
 	while (window.isOpen())

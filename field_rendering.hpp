@@ -5,14 +5,13 @@
 #include <vector>
 #include "field_logic.hpp"
 
-/*
-class FieldLogic;
+using namespace sf;
 
 class FieldRendering
 {
 private:
     const int m_width;
-    FieldLogic m_field_logic;
+    FieldLogic& m_field_logic;
 
     std::vector<std::vector<RectangleShape>> m_board_fill; // field squares
     std::vector<std::vector<Sprite>> m_checkers_sprite; // checkers picture on the field
@@ -24,7 +23,7 @@ private:
 public:
     int get_width();
 
-    FieldRendering(FieldLogic& logic);
+    FieldRendering(FieldLogic &logic);
 };
-*/
+
 #endif

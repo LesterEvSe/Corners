@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <cstdlib> // for std::swap
+#include <utility> // for std::make_pair
 #include <vector> // for constant dimensions of boards
 //#include "field_rendering.hpp"
 
@@ -18,7 +19,7 @@ enum Checkers
 class FieldLogic
 {
 private:
-    //friend class FieldRendering;
+    friend class FieldRendering;
 	const int m_width;
 	const int m_dimension;
 
