@@ -12,5 +12,4 @@ add_subdirectory(game)
 file(GLOB SRCS "*.cpp")
 add_executable(Corners ${SRCS})
 
-#target_link_libraries(Corners -lsfml-graphics -lsfml-window -lsfml-system)
 target_link_libraries(Corners PUBLIC -lsfml-graphics -lsfml-window -lsfml-system game)
