@@ -5,14 +5,19 @@ using namespace sf;
 extern RenderWindow window;
 Texture white, black;
 
-// -----------
-// Constructor
-// -----------
+Field::Field() :
+    m_width(100),
+    m_dimension(8),
 
-Field::Field() : m_width(100), m_dimension(8), m_logic(m_dimension, std::vector<Checkers>(m_dimension)),
-                 m_board_fill(m_dimension, std::vector<RectangleShape>(m_dimension)),
-                 m_checkers_sprite(m_dimension, std::vector<Sprite>(m_dimension)),
-                 m_start(std::make_pair(-1, -1)), m_player_move(Checkers::WHITE), m_move_made(false), m_move(false), m_winner(-1)
+    m_logic(m_dimension, std::vector<Checkers>(m_dimension)),
+    m_board_fill(m_dimension, std::vector<RectangleShape>(m_dimension)),
+    m_checkers_sprite(m_dimension, std::vector<Sprite>(m_dimension)),
+
+    m_start(std::make_pair(-1, -1)),
+    m_player_move(Checkers::WHITE),
+    m_move_made(false),
+    m_move(false),
+    m_winner(-1)
 {
     white.loadFromFile("../images/white.png");
     black.loadFromFile("../images/black.png");
@@ -29,8 +34,8 @@ Field::Field() : m_width(100), m_dimension(8), m_logic(m_dimension, std::vector<
             window.draw(m_board_fill[i][j]);
         }
 
-    for (int i = 0; i < 3; ++i)
-        for (int j = 0; j < 3; ++j)
+    for (int i = 0; i < m_dimension-5; ++i)
+        for (int j = 0; j < m_dimension-5; ++j)
         {
             m_checkers_sprite[i][j] = Sprite(white);
             m_checkers_sprite[i + 5][j + 5] = Sprite(black);
@@ -47,11 +52,7 @@ Field::Field() : m_width(100), m_dimension(8), m_logic(m_dimension, std::vector<
     window.display();
 }
 
-// -------
-// private
-// -------
-
-void Field::choose_cell(const Event& event, int str, int col)
+void Field::choose_cell(const Event& event, const int str, const int col)
 {
 	if (static_cast<int>(event.key.code) == Mouse::Left && m_logic[str][col] == m_player_move)
 	{
@@ -94,10 +95,13 @@ void Field::check_winner()
 		for (int i = 0; i < 3; ++i)
 			for (int j = 0; j < 3; ++j)
 			{
-				if (m_logic[i][j] != Checkers::BLACK) black_win = false;
+				if (m_logic[i][j] != Checkers::BLACK)         black_win = false;
 				if (m_logic[i + 5][j + 5] != Checkers::WHITE) white_win = false;
 
-				if (!black_win && !white_win) { m_winner = -1; return; }
+				if (!black_win && !white_win) {
+                    m_winner = -1;
+                    return;
+                }
 			}
 		if (black_win && white_win) { m_winner = 0; return; }
 		if (white_win)				{ m_winner = 1; return; }
@@ -125,53 +129,48 @@ void Field::rendering()
 	window.display();
 }
 
-// ------
-// public
-// ------
-
-int Field::get_width() { return m_width; }
+int Field::get_width()  { return m_width;  }
 int Field::get_winner() { return m_winner; }
 
-void Field::move(const Event& event, int str, int col)
+void Field::move(const Event& event, const int str, const int col)
 {
-	if (!m_move) choose_cell(event, str, col);
-	else
-	{
-		// here str, col - current coordinates where we want to go, m_start - coordinates from where we want to go
-		if (static_cast<int>(event.key.code) == Mouse::Right)
-		{
-			next_move();
-			cancel();
-			m_move = false;
-		}
+	if (!m_move){
+        choose_cell(event, str, col);
+        return;
+    }
+    // here str, col - current coordinates where we want to go, m_start - coordinates from where we want to go
+    if (static_cast<int>(event.key.code) == Mouse::Right)
+    {
+        next_move();
+        cancel();
+        m_move = false;
+        return;
+    }
+    if (static_cast<int>(event.key.code) != Mouse::Left || m_logic[str][col] != Checkers::NONE) return;
 
-		else if (static_cast<int>(event.key.code) == Mouse::Left && m_logic[str][col] == Checkers::NONE)
-		{
-			// If the checker has moved one and the move has not yet been made
-			if (abs(m_start.first - str) < 2 && abs(m_start.second - col) < 2)
-			{
-				if (m_move_made) return;
-				std::swap(m_logic[m_start.first][m_start.second], m_logic[str][col]);
-                m_checkers_sprite[str][col] = (m_player_move == 1) ? Sprite(white) : Sprite(black);
-                m_checkers_sprite[str][col].move(col * m_width, str * m_width);
+    // If the checker has moved one and the move has not yet been made
+    if (abs(m_start.first - str) < 2 && abs(m_start.second - col) < 2)
+    {
+        if (m_move_made) return;
+        std::swap(m_logic[m_start.first][m_start.second], m_logic[str][col]);
+        m_checkers_sprite[str][col] = (m_player_move == 1) ? Sprite(white) : Sprite(black);
+        m_checkers_sprite[str][col].move(col * m_width, str * m_width);
 
-				m_move_made = true;
-				next_move();
-			}
+        m_move_made = true;
+        next_move();
+        return;
+    }
 
+    bool make_jump = (abs(m_start.first - str) + abs(m_start.second - col)) % 2;
+    bool make_move = m_logic[(m_start.first + str) / 2][(m_start.second + col) / 2];
+    if (!make_jump && make_move)
+    {
+        std::swap(m_logic[m_start.first][m_start.second], m_logic[str][col]);
+        m_checkers_sprite[str][col] = (m_player_move == 1) ? Sprite(white) : Sprite(black);
+        m_checkers_sprite[str][col].move(col * m_width, str * m_width);
 
-			// The 1st variable is whether it is possible to make a jump, the 2nd variable is whether there is a checker between the initial move and the next one
-			else if (!((abs(m_start.first - str) + abs(m_start.second - col)) % 2) && m_logic[(m_start.first + str) / 2][(m_start.second + col) / 2])
-			{
-
-				std::swap(m_logic[m_start.first][m_start.second], m_logic[str][col]);
-                m_checkers_sprite[str][col] = (m_player_move == 1) ? Sprite(white) : Sprite(black);
-                m_checkers_sprite[str][col].move(col * m_width, str * m_width);
-
-				m_move_made = true;
-				cancel();
-				choose_cell(event, str, col);
-			}
-		}
-	}
+        m_move_made = true;
+        cancel();
+        choose_cell(event, str, col);
+    }
 }

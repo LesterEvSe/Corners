@@ -8,6 +8,7 @@ void preparation_phase(Texture& start_menu, Texture& white_win,
 {
     window.setFramerateLimit(10);
     window.setPosition(Vector2i((1920-800)/2, (1080-800)/2)); // screen center
+
     // start menu and victory picture
     start_menu.loadFromFile("../images/start_menu.png");
     white_win.loadFromFile("../images/white_win.png");
@@ -21,8 +22,12 @@ void preparation_phase(Texture& start_menu, Texture& white_win,
     while (true)
     {
         window.pollEvent(event);
-        if (event.type == Event::Closed) { window.close(); break; }
-        if (event.key.code == Keyboard::Enter)	break;
+        if (event.type == Event::Closed) {
+            window.close();
+            break;
+        }
+        if (event.key.code == Keyboard::Enter)
+            break;
     }
 }
 
@@ -46,19 +51,24 @@ int main()
 		while (window.pollEvent(inner_event))
 		{
 			// clicked on the cross?
-			if (inner_event.type == Event::Closed) window.close();
+			if (inner_event.type == Event::Closed)
+                window.close();
 
 			// was the mouse button pressed?
-			if (inner_event.type == Event::MouseButtonPressed) field.move(inner_event, str, col);
+			if (inner_event.type == Event::MouseButtonPressed)
+                field.move(inner_event, str, col);
 		}
 
-		if (field.get_winner() == -1) continue;
-		else if (field.get_winner() == 0) window.draw(Sprite(tie));
-		else if (field.get_winner() == 1) window.draw(Sprite(white_win));
-		else window.draw(Sprite(black_win));
+		if      (field.get_winner() == -1)  continue;
+		else if (field.get_winner() == 0 )  window.draw(Sprite(tie));
+		else if (field.get_winner() == 1 )  window.draw(Sprite(white_win));
+		else                                window.draw(Sprite(black_win));
 
 		window.display();
-        while (window.pollEvent(inner_event)) { if (inner_event.type == Event::Closed) window.close(); }
+        while (window.pollEvent(inner_event)) {
+            if (inner_event.type == Event::Closed)
+                window.close();
+        }
 	}
 
 	return 0;
