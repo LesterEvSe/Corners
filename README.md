@@ -1,8 +1,15 @@
 
 # SFML Game Corners
   
-  A program for _Linux_ that uses the _SFML_ graphical library. This is a checker game called **Corners** designed to entertain two players on the same device. The rules of the game are shown on the main application screen.
+  A program for _Linux_ that uses the _SFML_ graphical library. This is a checker game called **Corners** designed to entertain two players on the same device. The rules of the game are shown on the main application screen. Read only paragraph **Easy way to build and run**, if you could not build, then read all the way to the end, starting with paragraph **Requirements**
   
+##  Easy way to build and run
+
+  This path via .sh files.
+  - In order for the .sh files to run, they need to be allowed to run with the ***chmod +x build.sh game.sh*** command.
+  - Next, install the necessary programs and build the project, using the ***bash build.sh*** command.
+  - Lastly, you can run the game with the ***bash game.sh*** command.
+
 ##  Requirements
   
   The main thing you need to run is to have SFML version 2.5.1 or higher installed on your computer. You can install it with the command
