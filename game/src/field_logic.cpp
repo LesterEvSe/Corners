@@ -28,10 +28,10 @@ void FieldLogic::check_winner()
     if (m_player_move != Checkers::WHITE) return;
     bool white_win = true;
     bool black_win = true;
-    for (int i = 0; i < 3; ++i)
-        for (int j = 0; j < 3; ++j)
+    for (int i = 0; i < m_dimension-5; ++i)
+        for (int j = 0; j < m_dimension-5; ++j)
         {
-            if (m_logic[i][j] != Checkers::BLACK)         black_win = false;
+            if (m_logic[i][j]         != Checkers::BLACK) black_win = false;
             if (m_logic[i + 5][j + 5] != Checkers::WHITE) white_win = false;
 
             if (!black_win && !white_win) {
