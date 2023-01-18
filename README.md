@@ -5,7 +5,7 @@
   
 ##  Requirements
   
-  The main thing you need to run is to have SFML version 2.5.1 or higher installed on your computer. You can install it with the command  
+  The main thing you need to run is to have SFML version 2.5.1 or higher installed on your computer. You can install it with the command
   ***sudo apt-get install libsfml-dev*** or see the installation guide, on the official website https://www.sfml-dev.org/index.php
   
 ##  Build
