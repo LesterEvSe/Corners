@@ -5,10 +5,11 @@
 
 class FieldRendering
 {
-private:
+public:
     friend class FieldLogic;
     static const int m_width = 100;
 
+private:
     std::vector<std::vector<RectangleShape>> m_board_fill;  // field squares
     std::vector<std::vector<Sprite>> m_checkers_sprite;     // checkers picture on the field
 

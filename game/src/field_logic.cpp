@@ -20,9 +20,7 @@ FieldLogic::FieldLogic() :
         }
 }
 
-int FieldLogic::get_width()  const  { return m_field_rendering.m_width;  }
 int FieldLogic::get_winner() const  { return m_winner; }
-
 void FieldLogic::check_winner()
 {
     if (m_player_move != Checkers::WHITE) return;

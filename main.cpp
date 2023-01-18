@@ -1,6 +1,7 @@
 #include "field_logic.hpp"
 
-RenderWindow window(VideoMode(800, 800), "Corners", Style::Close); // main window of the game
+// main window of the game
+RenderWindow window(VideoMode(800, 800), "Corners", Style::Close);
 
 void preparation_phase(Texture& start_menu, Texture& white_win,
                        Texture& black_win, Texture& tie)
@@ -43,8 +44,8 @@ int main()
 	{
 		// reads the coordinates of the pressed key on the mouse
 		Vector2i pos = Mouse::getPosition(window);
-		int col = pos.x / field_logic.get_width();
-		int str = pos.y / field_logic.get_width();
+		int col = pos.x / FieldRendering::m_width;
+		int str = pos.y / FieldRendering::m_width;
 
 		// the queue of events in the loop is processed
 		Event inner_event{};

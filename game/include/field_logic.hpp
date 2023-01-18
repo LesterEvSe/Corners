@@ -27,9 +27,7 @@ private:
 public:
     FieldLogic();
 
-    int get_width()  const;
 	int get_winner() const;
-
 	void move(const Event&, int str, int col);
 };
 
