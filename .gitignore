@@ -1,3 +1,4 @@
 # Clion directory
 .idea
-*build*
+build
+*-build-*
