@@ -5,8 +5,6 @@ extern RenderWindow window;
 static Texture white, black;
 
 FieldRendering::FieldRendering() :
-    m_width(100),
-
     m_board_fill(FieldLogic::m_dimension, std::vector<RectangleShape>(FieldLogic::m_dimension)),
     m_checkers_sprite(FieldLogic::m_dimension, std::vector<Sprite>(FieldLogic::m_dimension))
 {
