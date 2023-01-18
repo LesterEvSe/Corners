@@ -5,7 +5,8 @@
   
 ##  Easy way to build and run
 
-  This path via .sh files.
+###  This path via .sh files.
+  - First of all, run the console from the "bash-scripts" directory
   - In order for the .sh files to run, they need to be allowed to run with the ***chmod +x build.sh game.sh*** command.
   - Next, install the necessary programs and build the project, using the ***bash build.sh*** command.
   - Lastly, you can run the game with the ***bash game.sh*** command.

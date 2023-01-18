@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # go to the build directory
-cd build
+cd ../build
 
 # run the game
 ./Corners
