@@ -40,19 +40,19 @@ FieldRendering::FieldRendering() :
     window.display();
 }
 
-void FieldRendering::draw_field(const std::vector<std::vector<Checkers>>& field_logic)
+void FieldRendering::draw_field(const std::vector<std::vector<Checkers>>& field_logic) const
 {
     for (int i = 0; i < field_logic.size(); ++i)
         for (int j = 0; j < field_logic[i].size(); ++j)
             window.draw(m_board_fill[i][j]);
 }
-void FieldRendering::draw_checkers(const std::vector<std::vector<Checkers>>& field_logic)
+void FieldRendering::draw_checkers(const std::vector<std::vector<Checkers>>& field_logic) const
 {
     for (int i = 0; i < field_logic.size(); ++i)
         for (int j = 0; j < field_logic[i].size(); ++j)
             if (field_logic[i][j]) window.draw(m_checkers_sprite[i][j]);
 }
-void FieldRendering::rendering(const std::vector<std::vector<Checkers>>& field_logic)
+void FieldRendering::rendering(const std::vector<std::vector<Checkers>>& field_logic) const
 {
     window.clear(Color::White); // clear the window and redraws it in white
     draw_field(field_logic);

@@ -6,11 +6,11 @@
 
 class FieldLogic
 {
-private:
-    friend class FieldRendering;
+public:
+    static const int m_dimension = 8;
 
+private:
     FieldRendering m_field_rendering;
-	static const int m_dimension = 8;
 	std::vector<std::vector<Checkers>> m_logic; // checkers that determine what stands in a certain cell
 
 	std::pair<int, int> m_start;
@@ -19,16 +19,17 @@ private:
 	bool m_move;
 	int  m_winner;
 
-	void choose_cell(const Event&, int str, int col);
+    void check_winner();
 	void cancel();
 	void next_move();
-	void check_winner();
+    void choose_cell(const Event&, int str, int col);
 
 public:
-	int get_width();
-	int get_winner();
+    FieldLogic();
 
-	FieldLogic();
+    int get_width()  const;
+	int get_winner() const;
+
 	void move(const Event&, int str, int col);
 };
 

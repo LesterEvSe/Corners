@@ -4,7 +4,6 @@
 
 FieldLogic::FieldLogic() :
     m_field_rendering(FieldRendering{}),
-
     m_logic(m_dimension, std::vector<Checkers>(m_dimension)),
 
     m_start(std::make_pair(-1, -1)),
@@ -21,17 +20,30 @@ FieldLogic::FieldLogic() :
         }
 }
 
-void FieldLogic::choose_cell(const Event& event, int str, int col)
-{
-	if (static_cast<int>(event.key.code) == Mouse::Left && m_logic[str][col] == m_player_move)
-	{
-        m_field_rendering.fill_cell_with_color(str, col, Color::Green);
+int FieldLogic::get_width()  const  { return m_field_rendering.m_width;  }
+int FieldLogic::get_winner() const  { return m_winner; }
 
-		m_start = std::make_pair(str, col);
-		m_move = true;
-	}
-	m_field_rendering.rendering(m_logic);
+void FieldLogic::check_winner()
+{
+    if (m_player_move != Checkers::WHITE) return;
+    bool white_win = true;
+    bool black_win = true;
+    for (int i = 0; i < 3; ++i)
+        for (int j = 0; j < 3; ++j)
+        {
+            if (m_logic[i][j] != Checkers::BLACK)         black_win = false;
+            if (m_logic[i + 5][j + 5] != Checkers::WHITE) white_win = false;
+
+            if (!black_win && !white_win) {
+                m_winner = -1;
+                return;
+            }
+        }
+    if (black_win && white_win) { m_winner = 0; return; }
+    if (white_win)				{ m_winner = 1; return; }
+    if (black_win)				{ m_winner = 2; return; }
 }
+
 void FieldLogic::cancel()
 {
 	if (m_start.first != -1)
@@ -55,29 +67,17 @@ void FieldLogic::next_move()
 	}
     m_field_rendering.rendering(m_logic);
 }
-void FieldLogic::check_winner()
+void FieldLogic::choose_cell(const Event& event, int str, int col)
 {
-    if (m_player_move != Checkers::WHITE) return;
-    bool white_win = true;
-	bool black_win = true;
-	for (int i = 0; i < 3; ++i)
-		for (int j = 0; j < 3; ++j)
-		{
-			if (m_logic[i][j] != Checkers::BLACK)         black_win = false;
-			if (m_logic[i + 5][j + 5] != Checkers::WHITE) white_win = false;
+    if (static_cast<int>(event.key.code) == Mouse::Left && m_logic[str][col] == m_player_move)
+    {
+        m_field_rendering.fill_cell_with_color(str, col, Color::Green);
 
-			if (!black_win && !white_win) {
-                m_winner = -1;
-                return;
-            }
-		}
-	if (black_win && white_win) { m_winner = 0; return; }
-	if (white_win)				{ m_winner = 1; return; }
-	if (black_win)				{ m_winner = 2; return; }
+        m_start = std::make_pair(str, col);
+        m_move = true;
+    }
+    m_field_rendering.rendering(m_logic);
 }
-
-int FieldLogic::get_width()  { return m_field_rendering.m_width;  }
-int FieldLogic::get_winner() { return m_winner; }
 
 void FieldLogic::move(const Event& event, int str, int col)
 {

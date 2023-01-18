@@ -9,7 +9,6 @@ set(CMAKE_CXX_STANDARD 11)
 
 add_subdirectory(game)
 
-file(GLOB SRCS "*.cpp")
-add_executable(Corners ${SRCS})
+add_executable(Corners main.cpp)
 
 target_link_libraries(Corners PUBLIC -lsfml-graphics -lsfml-window -lsfml-system game)

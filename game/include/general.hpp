@@ -1,5 +1,5 @@
-#ifndef GENERAL_SET_HPP
-#define GENERAL_SET_HPP
+#ifndef GENERAL_HPP
+#define GENERAL_HPP
 
 #include <SFML/Graphics.hpp>
 #include <vector>
