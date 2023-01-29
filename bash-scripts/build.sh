@@ -5,7 +5,7 @@ sudo apt-get install libsfml-dev
 sudo apt install g++
 sudo apt install cmake
 
-# go to the upper dirctory
+# go to the upper directory
 # if the directory exists, do not create it
 # go to it
 cd ..
