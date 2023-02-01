@@ -8,8 +8,8 @@ FieldRendering::FieldRendering() :
     m_board_fill(FieldLogic::m_dimension, std::vector<RectangleShape>(FieldLogic::m_dimension)),
     m_checkers_sprite(FieldLogic::m_dimension, std::vector<Sprite>(FieldLogic::m_dimension))
 {
-    white.loadFromFile("../images/white.png");
-    black.loadFromFile("../images/black.png");
+    white.loadFromFile("../res/white.png");
+    black.loadFromFile("../res/black.png");
 
     for (int i = 0; i < FieldLogic::m_dimension; ++i)
         for (int j = 0; j < FieldLogic::m_dimension; ++j)

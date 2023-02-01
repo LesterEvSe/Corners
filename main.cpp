@@ -10,10 +10,10 @@ void preparation_phase(Texture& start_menu, Texture& white_win,
     window.setPosition(Vector2i((1920-800)/2, (1080-800)/2)); // screen center
 
     // start menu and victory picture
-    start_menu.loadFromFile("../images/start_menu.png");
-    white_win.loadFromFile("../images/white_win.png");
-    black_win.loadFromFile("../images/black_win.jpg");
-    tie.loadFromFile("../images/tie.jpg");
+    start_menu.loadFromFile("../res/start_menu.png");
+    white_win.loadFromFile("../res/white_win.png");
+    black_win.loadFromFile("../res/black_win.jpg");
+    tie.loadFromFile("../res/tie.jpg");
 
     window.draw(Sprite(start_menu));
     window.display();
